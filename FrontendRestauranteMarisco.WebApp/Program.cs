@@ -1,7 +1,25 @@
+using FrontendRestauranteMarisco.WebApp.Service;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpClient<ApiService>(client =>
+{
+    // Define la URL base de la API que vamos a consumir
+    client.BaseAddress = new Uri("http://localhost:7181/api/"); // API base (puerto según pc)
+});
+
+builder.Services.AddScoped<AuthService>();
+
+// Configuración de la autenticación de la aplicación usando cookies
+builder.Services.AddAuthentication("AuthCookie")
+    .AddCookie("AuthCookie", options =>
+    {
+        options.LoginPath = "/Auth/Login";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(60); // Después de 60 minutos, el usuario tendrá que iniciar sesión nuevamente
+    });
 
 var app = builder.Build();
 
@@ -18,7 +36,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
+app.UseAuthentication(); // primero autenticación
+app.UseAuthorization();  // luego autorización
 
 app.MapControllerRoute(
     name: "default",

@@ -1,4 +1,5 @@
 ﻿using FrontendRestauranteMarisco.WebApp.DTOs.UsuarioDTOs;
+using FrontendRestauranteMarisco.WebApp.Helpers;
 using FrontendRestauranteMarisco.WebApp.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration.UserSecrets;

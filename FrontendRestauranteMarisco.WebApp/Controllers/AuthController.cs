@@ -1,5 +1,7 @@
 ﻿using FrontendRestauranteMarisco.WebApp.DTOs.UsuarioDTOs;
+using FrontendRestauranteMarisco.WebApp.Helpers;
 using FrontendRestauranteMarisco.WebApp.Service;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FrontendRestauranteMarisco.WebApp.Controllers
