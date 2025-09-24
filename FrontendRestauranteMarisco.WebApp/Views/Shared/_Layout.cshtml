@@ -27,6 +27,15 @@
                         </li>
                     </ul>
                 </div>
+                < !-- Mostar usuario loqueado -->
+                @await Component.InvokeAsync("UserInfo")
+
+                < !-- Botòn de cerrar sesion -->
+                <form asp-controller="Auth" asp-action="Logout" method="post" class="d-flex">
+                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                        Cerrar Sesión ❌
+                    </button>
+                </form>
             </div>
         </nav>
     </header>
