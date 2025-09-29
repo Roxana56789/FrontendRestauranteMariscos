@@ -8,7 +8,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient<ApiService>(client =>
 {
     // Define la URL base de la API que vamos a consumir
-    client.BaseAddress = new Uri("http://localhost:7181/api/"); // API base (puerto según pc)
+    client.BaseAddress = new Uri("https://localhost:7053/api/"); // API base (puerto según pc)
 });
 
 builder.Services.AddScoped<AuthService>();
@@ -36,8 +36,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication(); // primero autenticación
-app.UseAuthorization();  // luego autorización
+app.UseAuthentication(); 
+app.UseAuthorization();  
 
 app.MapControllerRoute(
     name: "default",

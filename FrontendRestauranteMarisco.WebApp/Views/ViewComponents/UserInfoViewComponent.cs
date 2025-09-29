@@ -7,7 +7,7 @@ namespace FrontendRestauranteMarisco.WebApp.Views.ViewComponents
     {
         public IViewComponentResult Invoke()
         {
-            var user = HttpContext.User; // Aquí tomamos el usuario desde el HttpContext
+            var user = HttpContext.User; 
 
             if (user.Identity != null && user.Identity.IsAuthenticated)
             {
