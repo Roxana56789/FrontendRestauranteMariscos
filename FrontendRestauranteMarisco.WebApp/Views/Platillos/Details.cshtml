@@ -1,0 +1,22 @@
+﻿@model FrontendRestauranteMarisco.WebApp.DTOs.PlatilloDTOs.CrearPlatilloDTO
+
+@{
+    ViewData["Title"] = "Detalles del Platillo";
+}
+
+<h2>Detalles del Platillo</h2>
+
+<div class="card" style="width: 30rem;">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Nombre</h5>
+        <p class="card-text"><strong>Descripción:</strong> @Model.Descripcion</p>
+        <p class="card-text"><strong>Precio:</strong> $@Model.Precio</p>
+        <p class="card-text"><strong>Categoría Id:</strong> @Model.CategoriaId</p>
+        <p class="card-text"><strong>Activo:</strong> @(Model.Activo ? "Sí" : "No")</p>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</div>

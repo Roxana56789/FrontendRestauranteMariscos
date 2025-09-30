@@ -1,4 +1,5 @@
 using FrontendRestauranteMarisco.WebApp.Service;
+using FrontendRestauranteMarisco.WebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,8 @@ builder.Services.AddHttpClient<ApiService>(client =>
 });
 
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<PlatilloService>();
+
 
 // Configuración de la autenticación de la aplicación usando cookies
 builder.Services.AddAuthentication("AuthCookie")

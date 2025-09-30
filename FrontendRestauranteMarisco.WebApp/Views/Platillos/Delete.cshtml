@@ -1,0 +1,24 @@
+﻿@model FrontendRestauranteMarisco.WebApp.DTOs.PlatilloDTOs.CrearPlatilloDTO
+
+@{
+    ViewData["Title"] = "Eliminar Platillo";
+}
+
+<h2>Eliminar Platillo</h2>
+
+<h4>¿Estás segura de que quieres eliminar este platillo?</h4>
+<div>
+    <h5>@Model.Nombre</h5>
+    <p><strong>Descripción:</strong> @Model.Descripcion</p>
+    <p><strong>Precio:</strong> $@Model.Precio</p>
+    <p><strong>Categoría Id:</strong> @Model.CategoriaId</p>
+    <p><strong>Activo:</strong> @(Model.Activo ? "Sí" : "No")</p>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group mt-3">
+        <input type="submit" value="Eliminar" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </div>
+</form>
