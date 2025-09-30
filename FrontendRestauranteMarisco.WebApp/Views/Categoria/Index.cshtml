@@ -1,0 +1,54 @@
+﻿@model IEnumerable<FrontendRestauranteMarisco.WebApp.DTOs.CategoriaDTOS.CategoriaDTO>
+
+@{
+    ViewData["Title"] = "Listado de Categorias";
+}
+
+<div class="data-card">
+
+    <h1><i class="fas fa-briefcase text-secondary"></i> @ViewData["Title"]</h1>
+    <p>
+        <a asp-action="Create" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Crear Nueva Categoria</a>
+    </p>
+
+@if (ViewBag.Error != null)
+{
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.Error
+        </div>
+}
+
+    <div class="table-responsive">
+        <table class="table table-hover" id="cargosTable">
+            <thead>
+                <tr>
+                    <th><i class="fas fa-id-badge"></i> Nombre</th>
+                    <th><i class="fas fa-align-left"></i> Descripción</th>
+                    <th class="text-center"><i class="fas fa-cog"></i> Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.Descripcion) && item.Descripcion.Length > 50)
+                            {
+                                @(item.Descripcion.Substring(0, 50) + "...")
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.Descripcion)
+                            }
+                        </td>
+                        <td class="text-center action-buttons">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary" title="Editar"><i class="fas fa-edit"></i></a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info" title="Detalles"><i class="fas fa-info-circle"></i></a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>

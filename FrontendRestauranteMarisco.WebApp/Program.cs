@@ -14,6 +14,7 @@ builder.Services.AddHttpClient<ApiService>(client =>
 
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<PlatilloService>();
+builder.Services.AddScoped<CategoriaService>();
 
 
 // Configuración de la autenticación de la aplicación usando cookies

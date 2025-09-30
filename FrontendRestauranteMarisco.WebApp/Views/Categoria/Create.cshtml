@@ -1,0 +1,22 @@
+﻿[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult>
+    Create(CategoriaCreateDTO categoria)
+    {
+    if (!ModelState.IsValid)
+    {
+    return View(categoria);
+    }
+    try
+    {
+    var token = await HttpContext.GetTokenAsync("access_token");
+    var categoria2 = await _categoriaService.CreateAsync(categoria, token);
+    return RedirectToAction(nameof(Index));
+    }
+    catch (Exception ex)
+    {
+    ModelState.AddModelError("", "Error al crear la categoria: " + ex.Message);
+    return View(categoria);
+    }
+    }
+
