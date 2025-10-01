@@ -2,8 +2,7 @@
 
 namespace FrontendRestauranteMarisco.WebApp.DTOs.PlatilloDTOs
 {
-    // DTO para actualizar un platillo
-    public class ActualizarPlatilloDTO
+    public class RespuestaPlatilloDTO
     {
         public int Id { get; set; }
 

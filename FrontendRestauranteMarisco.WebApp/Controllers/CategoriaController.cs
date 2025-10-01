@@ -26,7 +26,7 @@ namespace FrontendRestauranteMarisco.WebApp.Controllers
             catch (Exception ex)
             {
                 ViewBag.Error = "No se pudieron listar las categorias: " + ex.Message;
-                return View(new List<CategoriaDTO>());
+                return View(new List<CategoriaRespuestaDTO>());
             }
         }
 
@@ -81,10 +81,10 @@ namespace FrontendRestauranteMarisco.WebApp.Controllers
                 return NotFound();
             }
 
-            var dto = new CategoriaCreateDTO
+            var dto = new CategoriaActualizarDTO
             {
                 Nombre = cargo.Nombre,
-                Descripcion = cargo.Descripcion,
+                Descripcion = cargo.Descripcion
             };
             return View(dto);
         }
@@ -92,7 +92,7 @@ namespace FrontendRestauranteMarisco.WebApp.Controllers
         // POST: Editar
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, CategoriaCreateDTO categoria)
+        public async Task<IActionResult> Edit(int id, CategoriaActualizarDTO categoria)
         {
             if (!ModelState.IsValid)
             {

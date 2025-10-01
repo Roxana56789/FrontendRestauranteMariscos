@@ -1,0 +1,90 @@
+﻿@model FrontendRestauranteMarisco.WebApp.DTOs.CategoriaDTOS.CategoriaRespuestaDTO
+
+@{
+    ViewData["Title"] = "Detalles de Categoría";
+}
+
+<style>
+    body {
+        background: url('/images/restaurante-bg.jpg') no-repeat center center fixed;
+        background-size: cover;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .form-container {
+        max-width: 500px; /* Un poco más ancho para detalles */
+        margin: 80px auto;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0px 10px 30px rgba(0,0,0,0.3);
+        text-align: center;
+    }
+
+    h2 {
+        font-family: 'Georgia', serif;
+        font-weight: bold;
+        color: #7b1e20; /* tono vino elegante */
+        margin-bottom: 20px;
+    }
+
+    .dl-horizontal dt {
+        font-weight: bold;
+        color: #7b1e20;
+        text-align: right;
+    }
+
+    .dl-horizontal dd {
+        margin-bottom: 10px;
+        text-align: left;
+    }
+
+    .btn-action {
+        background-color: #b8860b; /* Dorado */
+        color: white;
+        border: none;
+        margin: 0 5px;
+        border-radius: 8px;
+        padding: 10px 15px;
+        font-size: 14px;
+        text-decoration: none;
+        display: inline-block;
+        transition: 0.3s ease;
+    }
+
+        .btn-action:hover {
+            background-color: #a7740a;
+            transform: scale(1.05);
+        }
+</style>
+
+<div class="form-container">
+    <h2>@ViewData["Title"]</h2>
+    <hr />
+    <dl class="row dl-horizontal text-left">
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+    </dl>
+    <div class="mt-4">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn-action">Editar</a>
+        <a asp-action="Index" class="btn-action">Volver al Listado</a>
+    </div>
+</div>

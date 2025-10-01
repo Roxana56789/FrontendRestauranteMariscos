@@ -1,50 +1,46 @@
 ﻿using FrontendRestauranteMarisco.WebApp.DTOs.PlatilloDTOs;
+using FrontendRestauranteMarisco.WebApp.Service;
 
 namespace FrontendRestauranteMarisco.WebApp.Services
 {
     public class PlatilloService
     {
-        private readonly HttpClient _http;
+        private readonly ApiService _api;
+        private const string Base = "Platillo";
 
-        // Aquí configuramos la ruta base de la API
-        private const string baseUrl = "api/platillos";
+        public PlatilloService(ApiService api) => _api = api;
 
-        public PlatilloService(HttpClient http)
+        public async Task<List<RespuestaPlatilloDTO>?> GetAllAsync(string? token = null)
         {
-            _http = http;
+            return await _api.GetAllAsync<RespuestaPlatilloDTO>(Base, token);
         }
 
-        // Obtener lista de platillos
-        public async Task<List<CrearPlatilloDTO>> GetPlatillosAsync()
+        public async Task<RespuestaPlatilloDTO?> GetByIdAsync(int id, string? token = null)
         {
-            return await _http.GetFromJsonAsync<List<CrearPlatilloDTO>>(baseUrl);
+            return await _api.GetByIdAsync<RespuestaPlatilloDTO>(Base, id, token);
         }
 
-        // Obtener lista de platillos con nombre de categoría
-        public async Task<List<PlatilloConCategoriaDTO>> GetPlatillosConCategoriaAsync()
+        public async Task<RespuestaPlatilloDTO> CreateAsync(CrearPlatilloDTO dto, string token)
         {
-            return await _http.GetFromJsonAsync<List<PlatilloConCategoriaDTO>>($"{baseUrl}/con-categoria");
+            return await _api.PostAsync<CrearPlatilloDTO, RespuestaPlatilloDTO>(Base, dto, token);
         }
 
-        // Crear un nuevo platillo
-        public async Task<bool> CrearPlatilloAsync(CrearPlatilloDTO dto)
+        public async Task<bool> UpdateAsync(int id, ActualizarPlatilloDTO dto, string token)
         {
-            var response = await _http.PostAsJsonAsync(baseUrl, dto);
-            return response.IsSuccessStatusCode;
+            try
+            {
+                await _api.PutAsync<ActualizarPlatilloDTO, RespuestaPlatilloDTO>(Base, id, dto, token);
+                return true; // Si la llamada es exitosa, retorna true.
+            }
+            catch (HttpRequestException)
+            {
+                return false;  // Captura la excepción si la solicitud no fue exitosa (por ejemplo, 404 Not Found o 400 Bad Request).
+            }
         }
 
-        // Actualizar un platillo
-        public async Task<bool> ActualizarPlatilloAsync(ActualizarPlatilloDTO dto)
+        public async Task<bool> DeleteAsync(int id, string token)
         {
-            var response = await _http.PutAsJsonAsync($"{baseUrl}/{dto.Id}", dto);
-            return response.IsSuccessStatusCode;
-        }
-
-        // Eliminar un platillo
-        public async Task<bool> EliminarPlatilloAsync(int id)
-        {
-            var response = await _http.DeleteAsync($"{baseUrl}/{id}");
-            return response.IsSuccessStatusCode;
+            return await _api.DeleteAsync(Base, id, token);
         }
     }
 }

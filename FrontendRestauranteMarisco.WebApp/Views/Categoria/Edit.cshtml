@@ -1,7 +1,7 @@
-﻿@model FrontendRestauranteMarisco.WebApp.DTOs.CategoriaDTOS.CategoriaCreateDTO
+﻿@model FrontendRestauranteMarisco.WebApp.DTOs.CategoriaDTOS.CategoriaActualizarDTO
 
 @{
-    ViewData["Title"] = "Crear Categoría";
+    ViewData["Title"] = "Editar Categoría";
 }
 
 <style>
@@ -81,7 +81,7 @@
 <div class="form-container">
     <h2>@ViewData["Title"]</h2>
 
-    <form asp-action="Create">
+    <form asp-action="Edit" asp-route-id="@ViewContext.RouteData.Values["id"]">
         <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
         <div class="form-group mb-3">
@@ -97,7 +97,7 @@
         </div>
 
         <div class="form-group">
-            <input type="submit" value="Crear" class="btn btn-primary w-100" />
+            <input type="submit" value="Guardar Cambios" class="btn btn-primary w-100" />
         </div>
     </form>
 

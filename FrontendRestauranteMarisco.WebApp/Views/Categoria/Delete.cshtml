@@ -1,0 +1,122 @@
+﻿@model FrontendRestauranteMarisco.WebApp.DTOs.CategoriaDTOS.CategoriaRespuestaDTO
+@{
+    ViewData["Title"] = "Eliminar Categoría";
+}
+
+<style>
+    body {
+        background: url('/images/restaurante-bg.jpg') no-repeat center center fixed;
+        background-size: cover;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .form-container {
+        max-width: 500px;
+        margin: 80px auto;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0px 10px 30px rgba(0,0,0,0.3);
+        text-align: center;
+    }
+
+    h2 {
+        font-family: 'Georgia', serif;
+        font-weight: bold;
+        color: #7b1e20; /* tono vino elegante */
+        margin-bottom: 10px;
+    }
+
+    .alert-warning {
+        border-radius: 10px;
+        padding: 15px;
+        font-size: 16px;
+        color: #7b1e20;
+        background-color: #fce8e8; /* Fondo muy claro */
+        border: 2px solid #7b1e20;
+        margin-bottom: 25px;
+        font-weight: bold;
+    }
+
+    .dl-horizontal dt {
+        font-weight: bold;
+        color: #7b1e20;
+        text-align: right;
+    }
+
+    .dl-horizontal dd {
+        margin-bottom: 10px;
+        text-align: left;
+    }
+
+    .btn-danger-custom {
+        background-color: #a00000; /* Rojo oscuro para eliminar */
+        color: white;
+        border: none;
+        margin-right: 15px;
+        border-radius: 12px;
+        padding: 10px 20px;
+        font-size: 16px;
+        transition: 0.3s ease;
+    }
+
+        .btn-danger-custom:hover {
+            background-color: #7b0000;
+            transform: scale(1.05);
+        }
+
+    .btn-volver {
+        background-color: #b8860b; /* Dorado */
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 10px 20px;
+        font-size: 16px;
+        text-decoration: none;
+        display: inline-block;
+        transition: 0.3s ease;
+    }
+
+        .btn-volver:hover {
+            background-color: #a7740a;
+        }
+</style>
+
+<div class="form-container">
+    <h2>@ViewData["Title"]</h2>
+    <h3>¿Está seguro de que desea eliminar esta categoría?</h3>
+    <hr />
+
+    <div class="alert alert-warning">
+        Esta acción es irreversible y podría afectar a platillos asociados.
+    </div>
+
+    <dl class="row dl-horizontal text-left">
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Eliminar" class="btn-danger-custom" />
+        <a asp-action="Index" class="btn-volver">Cancelar y Volver al Listado</a>
+    </form>
+</div>

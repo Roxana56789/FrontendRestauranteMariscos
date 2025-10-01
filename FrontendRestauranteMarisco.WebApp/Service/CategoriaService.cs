@@ -12,28 +12,28 @@ namespace FrontendRestauranteMarisco.WebApp.Service
         public CategoriaService(ApiService api) => _api = api;
 
         // Listar todos los cargos
-        public async Task<List<CategoriaDTO>?> GetAllAsync(string? token = null)
+        public async Task<List<CategoriaRespuestaDTO>?> GetAllAsync(string? token = null)
         {
-            return await _api.GetAllAsync<CategoriaDTO>(Base, token);
+            return await _api.GetAllAsync<CategoriaRespuestaDTO>(Base, token);
         }
 
         //Listar un cargo por id
-        public async Task<CategoriaDTO?> GetByIdAsync(int id, string? token = null)
+        public async Task<CategoriaRespuestaDTO?> GetByIdAsync(int id, string? token = null)
         {
-            return await _api.GetByIdAsync<CategoriaDTO>(Base, id, token);
+            return await _api.GetByIdAsync<CategoriaRespuestaDTO>(Base, id, token);
         }
         // Crear un nuevo cargo
-        public async Task<CategoriaDTO> CreateAsync(CategoriaCreateDTO dto, string token)
+        public async Task<CategoriaRespuestaDTO> CreateAsync(CategoriaCreateDTO dto, string token)
         {
-            return await _api.PostAsync<CategoriaCreateDTO, CategoriaDTO>(Base, dto, token);
+            return await _api.PostAsync<CategoriaCreateDTO, CategoriaRespuestaDTO>(Base, dto, token);
         }
 
         // Actualizar un cargo por id
-        public async Task<bool> UpdateAsync(int Id_Categoria, CategoriaCreateDTO dto, string token)
+        public async Task<bool> UpdateAsync(int Id_Categoria, CategoriaActualizarDTO dto, string token)
         {
             try
             {
-                await _api.PutAsync<CategoriaCreateDTO, CategoriaDTO>(Base, Id_Categoria, dto, token);
+                await _api.PutAsync<CategoriaActualizarDTO, CategoriaRespuestaDTO>(Base, Id_Categoria, dto, token);
                 return true;
             }
             catch (HttpRequestException)

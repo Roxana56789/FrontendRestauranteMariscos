@@ -52,15 +52,28 @@ namespace FrontendRestauranteMarisco.WebApp.Service
         }
 
         // PUT genérico
-        public async Task<TResponse> PutAsync<TRequest, TResponse>(string endpoint, int id, TRequest data, string token = null)
+        public async Task<TResponse> PutAsync<TRequest, TResponse>(string endpoint, int Id, TRequest data, string token = null)
         {
-            AddAuthorizationHeader(token);
+            // 1. Configuración y Llamada
             var content = new StringContent(JsonSerializer.Serialize(data, _jsonOptions), Encoding.UTF8, "application/json");
-            var response = await _httpClient.PutAsync($"{endpoint}/{id}", content);
+            var response = await _httpClient.PutAsync($"{endpoint}/{Id}", content);
+
+            // Si la respuesta no es exitosa (400, 404, 500), lanza una excepción
+            // NOTA: Si quieres ver el mensaje de error del backend, deberías mejorar
+            // esta sección con un try-catch que lea el contenido del error antes de EnsureSuccessStatusCode
             response.EnsureSuccessStatusCode();
 
-            var json = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<TResponse>(json, _jsonOptions);
+            // 2. Manejo de 204 No Content (¡La Solución!)
+            // Si la actualización es exitosa (código 204), no hay cuerpo JSON para leer.
+            if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+            {
+                // Retorna el valor por defecto para TResponse (ej. null para clases)
+                return default(TResponse);
+            }
+
+            // 3. Deserialización normal (para respuestas 200 OK con cuerpo)
+            var JsonResponse = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<TResponse>(JsonResponse, _jsonOptions);
         }
         // DELETE genérico
         public async Task<bool> DeleteAsync(string endpoint, int id, string token = null)
