@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontendRestauranteMarisco.WebApp", "FrontendRestauranteMarisco.WebApp\FrontendRestauranteMarisco.WebApp.csproj", "{AFCA8113-F882-4887-9538-F24D7FABEAE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontedRestauranteMarisco.WebApp.TestUI", "FrontedRestauranteMarisco.WebApp.TestUI\FrontedRestauranteMarisco.WebApp.TestUI.csproj", "{1AC1CBC2-119D-4586-A606-7840EF5677BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{AFCA8113-F882-4887-9538-F24D7FABEAE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFCA8113-F882-4887-9538-F24D7FABEAE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFCA8113-F882-4887-9538-F24D7FABEAE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AC1CBC2-119D-4586-A606-7840EF5677BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AC1CBC2-119D-4586-A606-7840EF5677BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AC1CBC2-119D-4586-A606-7840EF5677BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AC1CBC2-119D-4586-A606-7840EF5677BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
