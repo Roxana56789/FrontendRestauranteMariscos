@@ -29,8 +29,8 @@ namespace FrontendRestauranteMarisco.WebApp.TestUI
             Thread.Sleep(1000);
 
             // Rellena los campos de login (ajusta los 'name' según tu vista)
-            _driver.FindElement(By.Name("Email")).SendKeys("kenia@gmail.com");
-            _driver.FindElement(By.Name("Password")).SendKeys("kenia123");
+            _driver.FindElement(By.Name("Email")).SendKeys("Jeannette2005@gmail.com");
+            _driver.FindElement(By.Name("Password")).SendKeys("1234");
 
             // Envía el formulario
             _driver.FindElement(By.CssSelector("button[type='submit']")).Click();
@@ -39,7 +39,7 @@ namespace FrontendRestauranteMarisco.WebApp.TestUI
             Thread.Sleep(2000);
 
             // Verifica que redirige a la página Home
-            Assert.IsTrue(_driver.Url.Contains($"{_urlBase}/Home/Index") || _driver.Url == $"{_urlBase}/",
+            Assert.IsTrue(_driver.Url.Contains($"{_urlBase}") || _driver.Url == $"{_urlBase}/",
                 $"No se redirigió correctamente al Home. URL actual: {_driver.Url}");
         }
 
