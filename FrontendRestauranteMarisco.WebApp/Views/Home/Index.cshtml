@@ -2,55 +2,70 @@
     ViewData["Title"] = "Inicio";
 }
 
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background: url("/images/fondo-mariscos.png") no-repeat center center fixed;
-        background-size: cover;
-    }
+<!--
+    Este diseño utiliza clases de Tailwind CSS importadas en el _Layout_Redesign.
+    Aprovechamos las clases de flexbox, espaciado y colores para crear una vista moderna.
+-->
+<!-- Contenedor principal centrado, ocupa el 80% de la altura y ancho de la pantalla -->
+<div class="flex flex-col items-center justify-center min-h-[80vh] py-12 px-4 sm:px-6 lg:px-8">
 
-    .contenido {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        color: white;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-        flex-direction: column;
-        text-align: center;
-    }
+    <!-- Tarjeta de bienvenida - Aplicamos un diseño limpio y profesional -->
+    <div class="max-w-4xl w-full bg-white shadow-2xl rounded-xl p-8 sm:p-12 text-center transition-all duration-500 hover:shadow-xl hover:scale-[1.01]">
 
-        .contenido h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
+        <!-- Logo o Icono (usando SVG de ejemplo para un toque marino) -->
+        <div class="mx-auto w-24 h-24 text-blue-600 mb-6">
+            <svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <!-- Icono de un pez estilizado o almeja -->
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2v20m9-10h-6.21a4 4 0 00-7.58 0H3m18 0a9 9 0 01-9 9"></path>
+            </svg>
+        </div>
+
+        <!-- Título principal -->
+        <h1 class="text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">
+            Bienvenido al Panel de Administración
+        </h1>
+
+        <!-- Subtítulo / Descripción -->
+        <p class="mt-2 text-xl text-gray-600">
+            Comedor de Mariscos | <span class="text-orange-500 font-semibold">"Frescura y Sabor del Mar"</span>
+        </p>
+
+        <!-- Mensaje y Acciones para usuarios autenticados -->
+        @if (User.Identity.IsAuthenticated)
+        {
+            <p class="mt-6 text-lg text-blue-700 font-medium">
+                ¡Has iniciado sesión con éxito! Utiliza la barra lateral para navegar a los módulos de administración.
+            </p>
+
+            <!-- Botón de Menú para usuarios logueados (Contenedor con mt-8 añadido aquí para el espacio) -->
+            <div class="mt-8 flex justify-center">
+                <a asp-controller="Platillo" asp-action="Menu"
+                   class="px-6 py-3 bg-orange-600 text-white font-bold rounded-lg shadow-lg hover:bg-orange-700 transform hover:scale-105 transition duration-300">
+                    Ver Nuestro Menú 
+                </a>
+            </div>
         }
+        else
+        {
+            <!-- Sección para usuarios no autenticados (Destacando el menú para el público) -->
+            <p class="mt-6 text-lg text-gray-700">
+                Esta es la sección de administración. Si eres un cliente, por favor, visita nuestro menú.
+            </p>
 
-        .contenido p {
-            font-size: 1.5rem;
+            <div class="mt-8 flex justify-center space-x-4">
+                <!-- Botón primario para ver el menú (Acción principal) -->
+                <a asp-controller="Platillo" asp-action="Index"
+                   class="px-6 py-3 bg-orange-600 text-white font-bold rounded-lg shadow-lg hover:bg-orange-700 transform hover:scale-105 transition duration-300">
+                    Ver Nuestro Menú 
+                </a>
+
+                <!-- Botón secundario para iniciar sesión -->
+                <a asp-controller="Auth" asp-action="Login"
+                   class="px-6 py-3 border border-blue-600 text-blue-600 font-bold rounded-lg shadow-lg hover:bg-blue-50 transition duration-300">
+                    Acceso de Personal
+                </a>
+            </div>
         }
-
-    .btn-menu {
-        margin-top: 20px;
-        padding: 10px 20px;
-        background-color: #e63946;
-        border: none;
-        color: white;
-        font-size: 1.2rem;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: 0.3s;
-        text-decoration: none;
-    }
-
-        .btn-menu:hover {
-            background-color: #ff4d5a;
-        }
-</style>
-
-<div class="contenido">
-    <h1>Bienvenido a Comedor de Mariscos</h1>
-    <p>Los mejores platillos frescos del mar, ven y disfruta</p>
-    <a href="/Menu" class="btn-menu">Ver Menú</a>
+    </div>
 </div>

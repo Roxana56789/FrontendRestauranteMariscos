@@ -36,6 +36,22 @@ namespace FrontendRestauranteMarisco.WebApp.Controllers
                 return View(new List<RespuestaPlatilloDTO>());
             }
         }
+        public async Task<IActionResult> Menu()
+        {
+            try
+            {
+                var platillos = await _platilloService.GetAllAsync();
+                var categorias = await _categoriaService.GetAllAsync();
+                var categoriaNombres = categorias.ToDictionary(m => m.Id, m => m.Nombre);
+                ViewBag.CategoriaNombres = categoriaNombres;
+                return View(platillos);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "No se pudieron cargar los platillos: " + ex.Message;
+                return View(new List<RespuestaPlatilloDTO>());
+            }
+        }
 
 
         // GET: Proyecto/Details/5

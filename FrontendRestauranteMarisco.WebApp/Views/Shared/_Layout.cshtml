@@ -1,63 +1,150 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - FrontendRestauranteMarisco.WebApp</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/FrontendRestauranteMarisco.WebApp.styles.css" asp-append-version="true" />
+    <title>@ViewData["Title"] - Alcaldia WebApp</title>
+    <!-- Carga de Tailwind CSS para un diseño moderno y responsive -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración para usar la fuente Inter y un sistema de colores consistente -->
+    <style>
+        @@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fc;
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FrontendRestauranteMarisco.WebApp</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Categoria" asp-action="Index">Categoria</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Platillo" asp-action="Index">Menu</a>
-                        </li>
-                    </ul>
-                </div>
+<body class="min-h-screen flex flex-col">
 
+    <!-- BARRA SUPERIOR (HEADER) -->
+    <header class="sticky top-0 z-40 bg-white shadow-md">
+        <nav class="p-4 flex items-center justify-between container mx-auto">
+            <!-- Logo / Título de la Aplicación -->
+            <a class="text-2xl font-bold text-blue-700 hover:text-blue-900 transition duration-150" asp-area="" asp-controller="Home" asp-action="Index">
+                Restaurante Marisco Admin
+            </a>
+
+            <!-- Componentes de Usuario y Logout -->
+            <div class="flex items-center space-x-4">
+                @* El componente UserInfo debe manejar su propia lógica de visibilidad *@
                 @await Component.InvokeAsync("UserInfo")
 
-                <form asp-controller="Auth" asp-action="Logout" method="post" class="d-flex">
-                    <button type="submit" class="btn btn-outline-danger btn-sm">
-                        Cerrar Sesión ❌
-                    </button>
-                </form>
+                @* Mostrar botón de Logout solo si el usuario está autenticado *@
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <form asp-controller="Auth" asp-action="Logout" method="post" class="d-flex">
+                        <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg shadow-md hover:bg-red-700 transition duration-150 text-sm font-medium">
+                            Cerrar Sesión
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <a class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition duration-150 text-sm font-medium"
+                       asp-controller="Auth" asp-action="Login">
+                        Iniciar Sesión
+                    </a>
+                }
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
+
+  
+    <div class="flex flex-1">
+
+        @if (User.Identity.IsAuthenticated)
+        {
+           
+            <aside class="w-64 bg-gray-800 text-white shadow-xl hidden md:block transition-all duration-300">
+                <nav class="flex flex-col p-4 space-y-2 sticky top-[64px] h-[calc(100vh-64px)] overflow-y-auto">
+                    <h3 class="text-xs font-semibold uppercase tracking-wider text-gray-400 mt-2 mb-3 px-3">
+                        Módulos de Administración
+                    </h3>
+
+                    <!-- Ítem 1 -->
+                    <a class="nav-link-item" asp-area="" asp-controller="Home" asp-action="Index">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                        Inicio
+                    </a>
+
+                    <!-- Ítem 2 -->
+                    <a class="nav-link-item" asp-area="" asp-controller="Categoria" asp-action="Index">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h.01M7 11h.01M7 15h.01M7 19h.01M17 7h.01M17 3h.01M17 11h.01M17 15h.01M17 19h.01M10 7h.01M10 3h.01M10 11h.01M10 15h.01M10 19h.01M13 7h.01M13 3h.01M13 11h.01M13 15h.01M13 19h.01M20 7h.01M20 3h.01M20 11h.01M20 15h.01M20 19h.01M4 7h.01M4 3h.01M4 11h.01M4 15h.01M4 19h.01"></path></svg>
+                        Categorías
+                    </a>
+
+                    <!-- Ítem 3 -->
+                    <a class="nav-link-item" asp-area="" asp-controller="Platillo" asp-action="Index">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Platillos (Menú)
+                    </a>
+
+                    <!-- Ítem 4 (Ejemplo Adicional) -->
+                    <a class="nav-link-item" asp-area="" asp-controller="Home" asp-action="Privacy">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        Privacidad
+                    </a>
+
+                </nav>
+            </aside>
+        }
+
+        <main role="main" class="flex-1 pb-3 p-4 @(User.Identity.IsAuthenticated ? "md:ml-0" : "w-full")">
+            <div class="container mx-auto">
+                @RenderBody()
+            </div>
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - FrontendRestauranteMarisco.WebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <!-- FOOTER -->
+    <footer class="border-t bg-white text-gray-500 py-4 mt-auto">
+        <div class="container mx-auto px-4 text-center text-sm">
+            &copy; @DateTime.Now.Year - Restaurante Marisco WebApp -
+            <a class="text-blue-600 hover:text-blue-800" asp-area="" asp-controller="Home" asp-action="Privacy">Política de Privacidad</a>
         </div>
     </footer>
+
+    <!-- Estilos de los ítems de navegación de la barra lateral -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#1d4ed8', // blue-700
+                        'secondary': '#f97316', // orange-500
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .nav-link-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            color: #d1d5db; /* gray-300 */
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        .nav-link-item:hover {
+            background-color: #374151; /* gray-700 */
+            color: #ffffff;
+        }
+        /* Clase para el enlace activo  */
+        .nav-link-item.active {
+            background-color: #1d4ed8; /* blue-700 */
+            color: #ffffff;
+            font-weight: 600;
+        }
+    </style>
+
+    @* Scripts originales de Bootstrap y jQuery  *@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>
