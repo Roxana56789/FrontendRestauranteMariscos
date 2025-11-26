@@ -9,7 +9,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient<ApiService>(client =>
 {
     // Define la URL base de la API que vamos a consumir
-    client.BaseAddress = new Uri("https://localhost:7053/api/"); // API base (puerto según pc)
+    client.BaseAddress = new Uri("http://18.190.158.66/ComedorMariscos/api/"); // API base (puerto según pc)
 });
 
 builder.Services.AddScoped<AuthService>();
